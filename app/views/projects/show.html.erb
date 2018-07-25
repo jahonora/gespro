@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<h2>
+  <%= @project.name %>
+</h2>
+<div class="container">
+	<h4>Employes involved</h4>
+	<div class="row">
+		<div class="col-md-6">
+			<table class="table">
+				<tr>
+					<th>Id</th>
+					<th>Nombre</th>
+					<th></th>
+				</tr>
+				<% @employes.each do |employe| %>
+					<tr>
+						<td><%= employe.id %></td>
+						<td><%= employe.name %></td>
+						<td><%= link_to("Eliminar", remove_employe_project_path(@project, employe) , method: :delete, class: "btn btn-danger") %></td>
+					</tr>
+				<% end %>
+				<tr>
+					<td></td>
+			        <td>
+			            <%= form_tag (add_employe_project_path(@project)) do %>
+			              <%= select_tag 'employe_id', options_for_select(Employe.all.collect{ |e| [e.name, e.id] }) %>
+			              <%= submit_tag "Add", name: nil, class: 'btn btn-info' %>
+			            <% end %>
+			        </td>
+			        <td></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>
