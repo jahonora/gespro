@@ -30,8 +30,11 @@ class EmployesController < ApplicationController
 
   def add_project
     @project = Project.find_by(id: params[:project_id])
-    @employe.projects << @project
-    redirect_to employe_path(@employe), notice: 'Project has been added'
+    if @employe.assignments.build(project: @project).save
+      redirect_to employe_path(@employe), notice: 'Project has been added'
+    else
+      redirect_to employe_path(@employe), alert: 'Project cant be added'      
+    end
   end
 
   # POST /employes

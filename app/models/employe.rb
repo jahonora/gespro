@@ -1,4 +1,4 @@
 class Employe < ApplicationRecord
-	has_many :assignment, dependent: :destroy
-  	has_many :projects, through: :assignment 
+	has_many :assignments, dependent: :destroy
+  	has_many :projects, through: :assignments 
 end
